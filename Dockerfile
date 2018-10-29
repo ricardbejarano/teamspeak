@@ -1,7 +1,7 @@
 FROM debian:stretch AS build
 
-ARG TEAMSPEAK_VERSION="3.4.0"
-ARG TEAMSPEAK_CHECKSUM="7d6ec8e97d4a9e9913a7e01f2e7f5f9fddfdc41b11e668d013a0f4b574d1918b"
+ARG TEAMSPEAK_VERSION="3.5.0"
+ARG TEAMSPEAK_CHECKSUM="f5ff4d313865ca8ab4a9c63f447f584a9363a313624950f683ec4d6f59d55059"
 
 ADD http://dl.4players.de/ts/releases/$TEAMSPEAK_VERSION/teamspeak3-server_linux_amd64-$TEAMSPEAK_VERSION.tar.bz2 /teamspeak.tar.bz2
 RUN if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
