@@ -12,6 +12,11 @@ Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejaran
 * Based on the official `gcr.io/distroless/base` image
 
 
+## Information
+
+The `ts3server` process binds to `9987/UDP` by default.
+
+
 ## Volumes
 
 Mount your **ts3server.sqlitedb** and **ts3server.sqlitedb-wal** files on the container's `/ts3server.sqlitedb` and `/ts3server.sqlitedb-wal` paths, respectively, for server configuration persistency.
