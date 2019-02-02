@@ -19,4 +19,4 @@ Mount your **ts3server.sqlitedb** and **ts3server.sqlitedb-wal** files on the co
 
 ## License
 
-See [LICENSE](LICENSE).
+See [LICENSE](https://github.com/ricardbejarano/teamspeak/blob/master/LICENSE).
