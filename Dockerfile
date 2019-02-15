@@ -16,11 +16,11 @@ FROM gcr.io/distroless/base
 ENV LD_LIBRARY_PATH="/lib"
 ENV TS3SERVER_LICENSE="accept"
 
-COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /ts/ts3server
-COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /ts/sql
+COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /ts3server
+COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /sql
 COPY --from=build \
      /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
      /tmp/teamspeak3-server_linux_amd64/libts3db_sqlite3.so \
      /lib/
 
-ENTRYPOINT ["/ts/ts3server"]
+ENTRYPOINT ["/ts3server"]
