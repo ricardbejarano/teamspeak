@@ -4,6 +4,7 @@
 
 Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak).
 
+
 ## Tags
 
 [`3.6.1`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
