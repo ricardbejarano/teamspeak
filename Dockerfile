@@ -5,8 +5,8 @@ ARG TEAMSPEAK_CHECKSUM="07c9680064ae64851269fbdbce159006e547b30bb5fa16b355230ddf
 
 ADD http://dl.4players.de/ts/releases/$TEAMSPEAK_VERSION/teamspeak3-server_linux_amd64-$TEAMSPEAK_VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
 
-WORKDIR /tmp
-RUN if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
+RUN cd /tmp && \
+    if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
     apt update && \
     apt install -y lbzip2 ca-certificates && \
     tar xf /tmp/teamspeak.tar.bz2
