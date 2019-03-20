@@ -12,7 +12,7 @@ Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejaran
 
 ## Features
 
-* Super tiny (only `18.1MB`)
+* Super tiny (only `18.2MB`)
 * Built with the official Linux binary (available [here](https://teamspeak.com/en/your-download/#server))
 * Built from `scratch`, see the [Filesystem](#Filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
