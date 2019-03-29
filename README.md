@@ -7,7 +7,7 @@ Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejaran
 
 ## Tags
 
-[`3.7.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+[`3.7.1`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
 
 
 ## Features
