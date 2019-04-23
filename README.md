@@ -1,5 +1,5 @@
 <p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/speech-balloon_1f4ac.png width=120px></p>
-<h1 align=center>teamspeak (Docker image)</h1>
+<h1 align=center>teamspeak (container image)</h1>
 <p align=center>Minimal container image of the <a href=https://teamspeak.com/en/>TeamSpeak voice chat server</a></p>
 
 Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak).
