@@ -33,4 +33,4 @@ COPY --from=build /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
 COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /sql
 COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /ts3server
 
-CMD ["/ts3server"]
+ENTRYPOINT ["/ts3server"]
