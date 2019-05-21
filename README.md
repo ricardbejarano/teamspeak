@@ -2,12 +2,20 @@
 <h1 align=center>teamspeak (container image)</h1>
 <p align=center>Minimal container image of the <a href=https://teamspeak.com/en/>TeamSpeak voice chat server</a></p>
 
-Available at [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak).
-
 
 ## Tags
 
-[`3.7.1`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+### Docker Hub
+
+Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
+
+- [`3.7.1`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+
+### Quay
+
+Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak):
+
+- [`3.7.1`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
 
 
 ## Features
