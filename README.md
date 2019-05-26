@@ -22,7 +22,7 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](htt
 
 * Super tiny (only `18.2MB`)
 * Built with the official Linux binary (available [here](https://teamspeak.com/en/your-download/#server))
-* Built from `scratch`, see the [Filesystem](#Filesystem) section below for an exhaustive list of the image's contents
+* Built from `scratch`, see the [Filesystem](#filesystem) section below for an exhaustive list of the image's contents
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
 
 
@@ -30,15 +30,13 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](htt
 
 ### Volumes
 
-| Mountpoint              | Description                       |
-|-------------------------|-----------------------------------|
-| /ts3server.sqlitedb     | SQLite (database file)            |
-| /ts3server.sqlitedb-wal | SQLite (write-ahead logging file) |
-| /query_ip_blacklist.txt | ServerQuery IP blacklist          |
-| /query_ip_whitelist.txt | ServerQuery IP whitelist          |
-| /ssh_host_rsa_key       | SSH Host RSA key                  |
-| /files                  | Server files                      |
-| /logs                   | Log files                         |
+- `/ts3server.sqlitedb`: database file
+- `/ts3server.sqlitedb-wal`: database WAL file
+- `/query_ip_blacklist.txt`: ServerQuery IP blacklist
+- `/query_ip_whitelist.txt`: ServerQuery IP whitelist
+- `/ssh_host_rsa_key`: SSH host RSA key
+- `/files`: server files
+- `/logs`: logs
 
 
 ## Filesystem
