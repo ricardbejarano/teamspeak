@@ -26,6 +26,21 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](htt
 * Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
 
 
+## Configuration
+
+### Volumes
+
+| Mountpoint              | Description                       |
+|-------------------------|-----------------------------------|
+| /ts3server.sqlitedb     | SQLite (database file)            |
+| /ts3server.sqlitedb-wal | SQLite (write-ahead logging file) |
+| /query_ip_blacklist.txt | ServerQuery IP blacklist          |
+| /query_ip_whitelist.txt | ServerQuery IP whitelist          |
+| /ssh_host_rsa_key       | SSH Host RSA key                  |
+| /files                  | Server files                      |
+| /logs                   | Log files                         |
+
+
 ## Filesystem
 
 The images' contents are:
@@ -50,18 +65,6 @@ The images' contents are:
 │   └──  ...
 └── ts3server
 ```
-
-### Volumes
-
-| Mountpoint              | Description                       |
-|-------------------------|-----------------------------------|
-| /ts3server.sqlitedb     | SQLite (database file)            |
-| /ts3server.sqlitedb-wal | SQLite (write-ahead logging file) |
-| /query_ip_blacklist.txt | ServerQuery IP blacklist          |
-| /query_ip_whitelist.txt | ServerQuery IP whitelist          |
-| /ssh_host_rsa_key       | SSH Host RSA key                  |
-| /files                  | Server files                      |
-| /logs                   | Log files                         |
 
 
 ## License
