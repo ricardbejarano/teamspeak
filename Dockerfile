@@ -3,7 +3,7 @@ FROM debian AS build
 ARG TEAMSPEAK_VERSION="3.8.0"
 ARG TEAMSPEAK_CHECKSUM="6122ec5949cf53d91b7b8f76c5e7ea9921fd1ec07dce3cf715d8587e31c6f5af"
 
-ADD http://dl.4players.de/ts/releases/$TEAMSPEAK_VERSION/teamspeak3-server_linux_amd64-$TEAMSPEAK_VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
+ADD https://files.teamspeak-services.com/releases/server/$TEAMSPEAK_VERSION/teamspeak3-server_linux_amd64-$TEAMSPEAK_VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
 
 RUN cd /tmp && \
       if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
