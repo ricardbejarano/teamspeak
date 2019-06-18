@@ -32,6 +32,5 @@ COPY --from=build /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
 COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /sql
 COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /
 
-WORKDIR /
 EXPOSE 9987/udp 10011/tcp 30033/tcp
 ENTRYPOINT ["/ts3server"]
