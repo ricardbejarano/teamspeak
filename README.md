@@ -9,13 +9,13 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
 
-- [`3.8.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+- [`3.9.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak):
 
-- [`3.8.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+- [`3.9.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
 
 
 ## Features
