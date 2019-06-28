@@ -28,8 +28,13 @@ COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
                   /lib/
 COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /sql
+COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /data/sql
 COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /
 
+COPY --chown=100:100 rootfs /
+
+USER teamspeak:teamspeak
+WORKDIR /data
+VOLUME ["/data"]
 EXPOSE 9987/udp 10011/tcp 30033/tcp
 ENTRYPOINT ["/ts3server"]

@@ -20,23 +20,23 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](htt
 
 ## Features
 
-* Super tiny (only `18.2MB`)
-* Built with the official Linux binary (available [here](https://teamspeak.com/en/your-download/#server))
-* Built from `scratch`, see the [Filesystem](#filesystem) section below for an exhaustive list of the image's contents
-* Reduced attack surface (no `bash`, no UNIX tools, no package manager...)
+* Super tiny (`~20.4MB`)
+* Binary pulled from official website
+* Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
+* Reduced attack surface (no shell, no UNIX tools, no package manager...)
 
 
 ## Configuration
 
 ### Volumes
 
-- `/ts3server.sqlitedb`: database file
-- `/ts3server.sqlitedb-wal`: database WAL file
-- `/query_ip_blacklist.txt`: ServerQuery IP blacklist
-- `/query_ip_whitelist.txt`: ServerQuery IP whitelist
-- `/ssh_host_rsa_key`: SSH host RSA key
-- `/files`: server files
-- `/logs`: logs
+- `/data/ts3server.sqlitedb`: database file
+- `/data/ts3server.sqlitedb-wal`: database WAL file
+- `/data/query_ip_blacklist.txt`: ServerQuery IP blacklist
+- `/data/query_ip_whitelist.txt`: ServerQuery IP whitelist
+- `/data/ssh_host_rsa_key`: SSH host RSA key
+- `/data/files`: server files
+- `/data/logs`: logs
 
 
 ## Filesystem
@@ -45,22 +45,28 @@ The images' contents are:
 
 ```
 /
+├── data/
+│   ├── .keep
+│   └── sql/...
+│       └── ...
 ├── etc/
+│   ├── group
+│   ├── passwd
 │   └── ssl/
 │       └── certs/
 │           └── ca-certificates.crt
 ├── lib/
 │   ├── libc.so.6
 │   ├── libdl.so.2
+│   ├── libgcc_s.so.1
 │   ├── libm.so.6
 │   ├── libpthread.so.0
 │   ├── librt.so.1
+│   ├── libstdc++.so.6
 │   ├── libts3_ssh.so
 │   └── libts3db_sqlite3.so
 ├── lib64/
 │   └── ld-linux-x86-64.so.2
-├── sql/
-│   └──  ...
 └── ts3server
 ```
 
