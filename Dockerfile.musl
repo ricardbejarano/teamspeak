@@ -1,0 +1,34 @@
+FROM alpine AS build
+
+ARG TEAMSPEAK_VERSION="3.9.0"
+ARG TEAMSPEAK_CHECKSUM="cca4071addd9e68b53564c5c0ed361a3f798693350a64de122feadf1c7b3e8bb"
+
+ADD https://files.teamspeak-services.com/releases/server/$TEAMSPEAK_VERSION/teamspeak3-server_linux_alpine-$TEAMSPEAK_VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
+
+RUN if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
+    apk add bzip2 libgcc libstdc++ ca-certificates && \
+    tar -C /tmp -xf /tmp/teamspeak.tar.bz2
+
+
+FROM scratch
+
+ENV LD_LIBRARY_PATH="/lib"
+ENV TS3SERVER_LICENSE="accept"
+
+COPY --from=build /lib/ld-musl-x86_64.so.1 \
+                  /usr/lib/libgcc_s.so.1 \
+                  /usr/lib/libstdc++.so.6 \
+                  /tmp/teamspeak3-server_linux_alpine/libts3_ssh.so \
+                  /tmp/teamspeak3-server_linux_alpine/libts3db_sqlite3.so \
+                  /lib/
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /tmp/teamspeak3-server_linux_alpine/sql /data/sql
+COPY --from=build /tmp/teamspeak3-server_linux_alpine/ts3server /
+
+COPY --chown=100:100 rootfs /
+
+USER teamspeak:teamspeak
+WORKDIR /data
+VOLUME ["/data"]
+EXPOSE 9987/udp 10011/tcp 30033/tcp
+ENTRYPOINT ["/ts3server"]

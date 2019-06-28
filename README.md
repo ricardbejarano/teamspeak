@@ -9,18 +9,20 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
 
-- [`3.9.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+- [`3.9.0-glibc`, `3.9.0`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
+- [`3.9.0-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
 
 ### Quay
 
-Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak):
+Available on [Quay](https://quay.io) as:
 
-- [`3.9.0`, `latest` *(Dockerfile)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile)
+- [`quay.io/ricardbejarano/teamspeak-glibc`](https://quay.io/repository/ricardbejarano/teamspeak-glibc), tags: [`3.9.0`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
+- [`quay.io/ricardbejarano/teamspeak-musl`](https://quay.io/repository/ricardbejarano/teamspeak-musl), tags: [`3.9.0`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
 
 
 ## Features
 
-* Super tiny (`~20.4MB`)
+* Super tiny (`glibc`-based is `~20.4MB` and `musl`-based is `~16.3MB`)
 * Binary pulled from official website
 * Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
@@ -30,18 +32,30 @@ Available on [Quay](https://quay.io) as [`quay.io/ricardbejarano/teamspeak`](htt
 
 ### Volumes
 
-- `/data/ts3server.sqlitedb`: database file
-- `/data/ts3server.sqlitedb-wal`: database WAL file
-- `/data/query_ip_blacklist.txt`: ServerQuery IP blacklist
-- `/data/query_ip_whitelist.txt`: ServerQuery IP whitelist
-- `/data/ssh_host_rsa_key`: SSH host RSA key
-- `/data/files`: server files
-- `/data/logs`: logs
+- Bind your **database file** at `/data/ts3server.sqlitedb`
+- Bind your **database WAL file** at `/data/ts3server.sqlitedb-wal`
+- Bind your **ServerQuery IP blacklist** at `/data/query_ip_blacklist.txt`
+- Bind your **ServerQuery IP whitelist** at `/data/query_ip_whitelist.txt`
+- Bind your **SSH host RSA key** at `/data/ssh_host_rsa_key`
+- Bind your **server files** at `/data/files`
+- Bind your **logs** at `/data/logs`
+
+***Note:** do not bind directly to `/data`, you would remove some runtime-required SQL scripts.*
+
+
+## Building
+
+- To build the `glibc`-based image: `$ docker build -t teamspeak:glibc -f Dockerfile.glibc .`
+- To build the `musl`-based image: `$ docker build -t teamspeak:musl -f Dockerfile.musl .`
 
 
 ## Filesystem
 
 The images' contents are:
+
+### `glibc`
+
+Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc`.
 
 ```
 /
@@ -67,6 +81,31 @@ The images' contents are:
 │   └── libts3db_sqlite3.so
 ├── lib64/
 │   └── ld-linux-x86-64.so.2
+└── ts3server
+```
+
+### `musl`
+
+Based on the [musl](https://www.musl-libc.org/) implementation of `libc`.
+
+```
+/
+├── data/
+│   ├── .keep
+│   └── sql/
+│       └── ...
+├── etc/
+│   ├── group
+│   ├── passwd
+│   └── ssl/
+│       └── certs/
+│           └── ca-certificates.crt
+├── lib/
+│   ├── ld-musl-x86_64.so.1
+│   ├── libgcc_s.so.1
+│   ├── libstdc++.so.6
+│   ├── libts3_ssh.so
+│   └── libts3db_sqlite3.so
 └── ts3server
 ```
 
