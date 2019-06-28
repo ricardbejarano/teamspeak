@@ -7,7 +7,7 @@ ADD https://files.teamspeak-services.com/releases/server/$TEAMSPEAK_VERSION/team
 
 RUN if [ "$TEAMSPEAK_CHECKSUM" != "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ]; then exit 1; fi && \
     apt update && \
-    apt install -y lbzip2 ca-certificates && \
+    apt install -y bzip2 ca-certificates && \
     tar -C /tmp -xf /tmp/teamspeak.tar.bz2
 
 
