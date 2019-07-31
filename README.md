@@ -46,8 +46,6 @@ Available on [Quay](https://quay.io) as:
 
 ## Filesystem
 
-The images' contents are:
-
 ### `glibc`
 
 Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc`.
@@ -55,7 +53,7 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 ```
 /
 ├── data/
-│   └── sql/...
+│   └── sql/
 │       └── ...
 ├── etc/
 │   ├── group
