@@ -1,6 +1,6 @@
-<p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/speech-balloon_1f4ac.png width=120px></p>
-<h1 align=center>teamspeak (container image)</h1>
-<p align=center>Minimal container image of the <a href=https://teamspeak.com/en/>TeamSpeak voice chat server</a></p>
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/speech-balloon_1f4ac.png" width="120px"></p>
+<h1 align="center">teamspeak (container image)</h1>
+<p align="center">Minimal container image of the <a href="https://teamspeak.com/en/">TeamSpeak voice chat server</a></p>
 
 
 ## Tags
@@ -22,25 +22,20 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~20.4MB` and `musl`-based is `~16.3MB`)
-* Binary pulled from official website
-* Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
+* Super tiny (`glibc`-based image is about `20.4MB`, `musl`-based image is about `16.3MB`)
+* Binary pulled from official sources during build time
+* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
+* Runs as unprivileged (non-`root`) user
 
 
 ## Configuration
 
 ### Volumes
 
-- Bind your **database file** at `/data/ts3server.sqlitedb`
-- Bind your **database WAL file** at `/data/ts3server.sqlitedb-wal`
-- Bind your **ServerQuery IP blacklist** at `/data/query_ip_blacklist.txt`
-- Bind your **ServerQuery IP whitelist** at `/data/query_ip_whitelist.txt`
-- Bind your **SSH host RSA key** at `/data/ssh_host_rsa_key`
-- Bind your **server files** at `/data/files`
-- Bind your **logs** at `/data/logs`
+- Mount your **database** at `/data/ts3server.sqlitedb`
 
-***Note:** do not bind directly to `/data`, you would remove some runtime-required SQL scripts.*
+***Note:** do not mount at `/data`, you would override some runtime dependencies.*
 
 
 ## Building
@@ -60,7 +55,6 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 ```
 /
 ├── data/
-│   ├── .keep
 │   └── sql/...
 │       └── ...
 ├── etc/
@@ -78,6 +72,7 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 │   ├── librt.so.1
 │   ├── libstdc++.so.6
 │   ├── libts3_ssh.so
+│   ├── libts3db_mariadb.so
 │   └── libts3db_sqlite3.so
 ├── lib64/
 │   └── ld-linux-x86-64.so.2
@@ -91,7 +86,6 @@ Based on the [musl](https://www.musl-libc.org/) implementation of `libc`.
 ```
 /
 ├── data/
-│   ├── .keep
 │   └── sql/
 │       └── ...
 ├── etc/
@@ -105,6 +99,7 @@ Based on the [musl](https://www.musl-libc.org/) implementation of `libc`.
 │   ├── libgcc_s.so.1
 │   ├── libstdc++.so.6
 │   ├── libts3_ssh.so
+│   ├── libts3db_mariadb.so
 │   └── libts3db_sqlite3.so
 └── ts3server
 ```

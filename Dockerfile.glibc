@@ -8,7 +8,10 @@ ADD https://files.teamspeak-services.com/releases/server/$TEAMSPEAK_VERSION/team
 RUN [ "$TEAMSPEAK_CHECKSUM" = "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ] && \
     apt update && \
     apt install -y bzip2 ca-certificates && \
-    tar -C /tmp -xf /tmp/teamspeak.tar.bz2
+    tar -C /tmp -xf /tmp/teamspeak.tar.bz2 && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd && \
+    mkdir -p /tmp/data
 
 
 FROM scratch
@@ -16,26 +19,27 @@ FROM scratch
 ENV LD_LIBRARY_PATH="/lib"
 ENV TS3SERVER_LICENSE="accept"
 
-COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
-                  /lib/x86_64-linux-gnu/libdl.so.2 \
-                  /lib/x86_64-linux-gnu/libm.so.6 \
-                  /lib/x86_64-linux-gnu/libpthread.so.0 \
-                  /lib/x86_64-linux-gnu/librt.so.1 \
-                  /lib/x86_64-linux-gnu/libgcc_s.so.1 \
-                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6 \
-                  /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
-                  /tmp/teamspeak3-server_linux_amd64/libts3db_sqlite3.so \
-                  /tmp/teamspeak3-server_linux_amd64/libts3db_mariadb.so \
-                  /lib/
-COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /tmp/teamspeak3-server_linux_amd64/sql /data/sql
-COPY --from=build /tmp/teamspeak3-server_linux_amd64/ts3server /
-
-COPY --chown=100:100 rootfs /
+COPY --from=build --chown=100:100 /tmp/teamspeak3-server_linux_amd64/ts3server /
+COPY --from=build --chown=100:100 /tmp/data /data
+COPY --from=build --chown=100:100 /tmp/teamspeak3-server_linux_amd64/sql /data/sql
+COPY --from=build --chown=100:100 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
+                                  /lib/x86_64-linux-gnu/libdl.so.2 \
+                                  /lib/x86_64-linux-gnu/libm.so.6 \
+                                  /lib/x86_64-linux-gnu/libpthread.so.0 \
+                                  /lib/x86_64-linux-gnu/librt.so.1 \
+                                  /lib/x86_64-linux-gnu/libgcc_s.so.1 \
+                                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6 \
+                                  /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
+                                  /tmp/teamspeak3-server_linux_amd64/libts3db_sqlite3.so \
+                                  /tmp/teamspeak3-server_linux_amd64/libts3db_mariadb.so \
+                                  /lib/
+COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
 USER 100:100
 WORKDIR /data
-VOLUME ["/data"]
 EXPOSE 9987/udp 10011/tcp 30033/tcp
 ENTRYPOINT ["/ts3server"]

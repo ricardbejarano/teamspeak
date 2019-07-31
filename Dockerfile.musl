@@ -7,7 +7,10 @@ ADD https://files.teamspeak-services.com/releases/server/$TEAMSPEAK_VERSION/team
 
 RUN [ "$TEAMSPEAK_CHECKSUM" = "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" ] && \
     apk add bzip2 libgcc libstdc++ ca-certificates && \
-    tar -C /tmp -xf /tmp/teamspeak.tar.bz2
+    tar -C /tmp -xf /tmp/teamspeak.tar.bz2 && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd && \
+    mkdir -p /tmp/data
 
 
 FROM scratch
@@ -15,21 +18,22 @@ FROM scratch
 ENV LD_LIBRARY_PATH="/lib"
 ENV TS3SERVER_LICENSE="accept"
 
-COPY --from=build /lib/ld-musl-x86_64.so.1 \
-                  /usr/lib/libgcc_s.so.1 \
-                  /usr/lib/libstdc++.so.6 \
-                  /tmp/teamspeak3-server_linux_alpine/libts3_ssh.so \
-                  /tmp/teamspeak3-server_linux_alpine/libts3db_sqlite3.so \
-                  /tmp/teamspeak3-server_linux_alpine/libts3db_mariadb.so \
-                  /lib/
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /tmp/teamspeak3-server_linux_alpine/sql /data/sql
-COPY --from=build /tmp/teamspeak3-server_linux_alpine/ts3server /
-
-COPY --chown=100:100 rootfs /
+COPY --from=build --chown=100:100 /tmp/teamspeak3-server_linux_alpine/ts3server /
+COPY --from=build --chown=100:100 /tmp/data /data
+COPY --from=build --chown=100:100 /tmp/teamspeak3-server_linux_alpine/sql /data/sql
+COPY --from=build --chown=100:100 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build --chown=100:100 /lib/ld-musl-x86_64.so.1 \
+                                  /usr/lib/libgcc_s.so.1 \
+                                  /usr/lib/libstdc++.so.6 \
+                                  /tmp/teamspeak3-server_linux_alpine/libts3_ssh.so \
+                                  /tmp/teamspeak3-server_linux_alpine/libts3db_sqlite3.so \
+                                  /tmp/teamspeak3-server_linux_alpine/libts3db_mariadb.so \
+                                  /lib/
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
 USER 100:100
 WORKDIR /data
-VOLUME ["/data"]
 EXPOSE 9987/udp 10011/tcp 30033/tcp
 ENTRYPOINT ["/ts3server"]
