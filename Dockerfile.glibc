@@ -33,6 +33,7 @@ COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
                                   /tmp/teamspeak3-server_linux_amd64/libts3_ssh.so \
                                   /tmp/teamspeak3-server_linux_amd64/libts3db_sqlite3.so \
                                   /tmp/teamspeak3-server_linux_amd64/libts3db_mariadb.so \
+                                  /tmp/teamspeak3-server_linux_amd64/redist/libmariadb.so.2 \
                                   /lib/
 COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
 COPY --from=build --chown=100:100 /tmp/group \
