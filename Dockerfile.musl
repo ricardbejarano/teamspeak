@@ -1,4 +1,4 @@
-FROM alpine AS build
+FROM alpine:3 AS build
 
 ARG VERSION="3.9.1"
 ARG CHECKSUM="cb612c26ee18fa0027119056f656ce449caf799f02c0f1864a14b68ea25ed239"
