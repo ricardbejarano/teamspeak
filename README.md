@@ -9,15 +9,15 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
 
-- [`3.10.1-glibc`, `3.10.1`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
-- [`3.10.1-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
+- [`3.10.2-glibc`, `3.10.2`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
+- [`3.10.2-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/teamspeak-glibc`](https://quay.io/repository/ricardbejarano/teamspeak-glibc), tags: [`3.10.1`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
-- [`quay.io/ricardbejarano/teamspeak-musl`](https://quay.io/repository/ricardbejarano/teamspeak-musl), tags: [`3.10.1`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
+- [`quay.io/ricardbejarano/teamspeak-glibc`](https://quay.io/repository/ricardbejarano/teamspeak-glibc), tags: [`3.10.2`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc)
+- [`quay.io/ricardbejarano/teamspeak-musl`](https://quay.io/repository/ricardbejarano/teamspeak-musl), tags: [`3.10.2`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl)
 
 
 ## Features
