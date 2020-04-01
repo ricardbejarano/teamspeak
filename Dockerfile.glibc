@@ -1,7 +1,7 @@
 FROM debian:10 AS build
 
-ARG VERSION="3.12.0"
-ARG CHECKSUM="a8a65388bb1d32260d3568e7bfb7da264f58a1256799e30309589856e4b36b51"
+ARG VERSION="3.12.1"
+ARG CHECKSUM="cfbffba30a570f0ba33a74ce5e5dbda54ce564d917a27183cdcaf82cc2b4abb7"
 
 ADD https://files.teamspeak-services.com/releases/server/$VERSION/teamspeak3-server_linux_amd64-$VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
 
