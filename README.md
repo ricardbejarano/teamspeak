@@ -1,32 +1,37 @@
 <p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/speech-balloon_1f4ac.png" width="120px"></p>
 <h1 align="center">teamspeak (container image)</h1>
-<p align="center">Minimal container image of the <a href="https://teamspeak.com/en/">TeamSpeak voice chat server</a></p>
+<p align="center">Minimal container image of the <a href="https://teamspeak.com/en/">TeamSpeak</a> voice chat server</p>
 
 
 ## Tags
 
 ### Docker Hub
 
-Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
+Available on Docker Hub as [`docker.io/ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
 
-- [`3.12.1-glibc`, `3.12.1`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc) (about `23.2MB`)
-- [`3.12.1-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl) (about `17.3MB`)
+- [`3.13.3`, `latest` *(Dockerfile)*](Dockerfile)
 
-### Quay
+### RedHat Quay
 
-Available on [Quay](https://quay.io) as:
+Available on RedHat Quay as [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak):
 
-- [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak), [`quay.io/ricardbejarano/teamspeak-glibc`](https://quay.io/repository/ricardbejarano/teamspeak-glibc), tags: [`3.12.1`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.glibc) (about `23.2MB`)
-- [`quay.io/ricardbejarano/teamspeak-musl`](https://quay.io/repository/ricardbejarano/teamspeak-musl), tags: [`3.12.1`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/teamspeak/blob/master/Dockerfile.musl) (about `17.3MB`)
+- [`3.13.3`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Features
 
-* Super tiny (see [Tags](#tags))
-* Binary pulled from official sources during build time
-* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
+* Compiled from source during build time
+* Built `FROM scratch`, with zero bloat
+* Statically linked to the [`musl`](https://musl.libc.org/) implementation of the C standard library
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
 * Runs as unprivileged (non-`root`) user
+
+
+## Building
+
+```bash
+docker build --tag ricardbejarano/teamspeak --file Dockerfile .
+```
 
 
 ## Configuration
@@ -35,74 +40,9 @@ Available on [Quay](https://quay.io) as:
 
 - Mount your **database** at `/data/ts3server.sqlitedb`
 
-***Note:** do not mount at `/data`, you would override some runtime dependencies.*
-
-
-## Building
-
-- To build the `glibc`-based image: `$ docker build -t teamspeak:glibc -f Dockerfile.glibc .`
-- To build the `musl`-based image: `$ docker build -t teamspeak:musl -f Dockerfile.musl .`
-
-
-## Filesystem
-
-### `glibc`
-
-Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc`.
-
-```
-/
-├── data/
-│   └── sql/
-│       └── ...
-├── etc/
-│   ├── group
-│   ├── passwd
-│   └── ssl/
-│       └── certs/
-│           └── ca-certificates.crt
-├── lib/
-│   ├── libc.so.6
-│   ├── libdl.so.2
-│   ├── libgcc_s.so.1
-│   ├── libm.so.6
-│   ├── libpthread.so.0
-│   ├── librt.so.1
-│   ├── libstdc++.so.6
-│   ├── libts3_ssh.so
-│   ├── libts3db_mariadb.so
-│   └── libts3db_sqlite3.so
-├── lib64/
-│   └── ld-linux-x86-64.so.2
-└── ts3server
-```
-
-### `musl`
-
-Based on the [musl](https://www.musl-libc.org/) implementation of `libc`.
-
-```
-/
-├── data/
-│   └── sql/
-│       └── ...
-├── etc/
-│   ├── group
-│   ├── passwd
-│   └── ssl/
-│       └── certs/
-│           └── ca-certificates.crt
-├── lib/
-│   ├── ld-musl-x86_64.so.1
-│   ├── libgcc_s.so.1
-│   ├── libstdc++.so.6
-│   ├── libts3_ssh.so
-│   ├── libts3db_mariadb.so
-│   └── libts3db_sqlite3.so
-└── ts3server
-```
+***Note:** do not mount at `/data`, you will override some runtime dependencies.*
 
 
 ## License
 
-See [LICENSE](https://github.com/ricardbejarano/teamspeak/blob/master/LICENSE).
+MIT licensed, see [LICENSE](LICENSE) for more details.
