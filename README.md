@@ -20,9 +20,9 @@ Available on RedHat Quay as [`quay.io/ricardbejarano/teamspeak`](https://quay.io
 
 ## Features
 
-* Compiled from source during build time
+* Pulled from official sources during build time
 * Built `FROM scratch`, with zero bloat
-* Statically linked to the [`musl`](https://musl.libc.org/) implementation of the C standard library
+* Dynamically linked to the [`musl`](https://musl.libc.org/) implementation of the C standard library
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
 * Runs as unprivileged (non-`root`) user
 
