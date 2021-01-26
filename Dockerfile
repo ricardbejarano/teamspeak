@@ -10,7 +10,7 @@ RUN [ "$(sha256sum /tmp/teamspeak.tar.bz2 | awk '{print $1}')" = "$CHECKSUM" ] &
     tar -C /tmp -xf /tmp/teamspeak.tar.bz2
 
 RUN mkdir -p /rootfs/bin && \
-      cp /tmp/teamspeak3-server_linux_alpine/ts3server /rootfs/ && \
+      cp /tmp/teamspeak3-server_linux_alpine/ts3server /rootfs/bin/ && \
     mkdir -p /rootfs/data && \
       cp -r /tmp/teamspeak3-server_linux_alpine/sql /rootfs/data/ && \
     mkdir -p /rootfs/etc && \
@@ -40,4 +40,4 @@ COPY --from=build --chown=10000:10000 /rootfs /
 USER 10000:10000
 WORKDIR /data
 EXPOSE 9987/udp 10011/tcp 30033/tcp
-ENTRYPOINT ["/ts3server"]
+ENTRYPOINT ["/bin/ts3server"]
