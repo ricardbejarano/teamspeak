@@ -9,13 +9,13 @@
 
 Available on Docker Hub as [`docker.io/ricardbejarano/teamspeak`](https://hub.docker.com/r/ricardbejarano/teamspeak):
 
-- [`3.13.4`, `latest` *(Dockerfile)*](Dockerfile)
+- [`3.13.5`, `latest` *(Dockerfile)*](Dockerfile)
 
 ### RedHat Quay
 
 Available on RedHat Quay as [`quay.io/ricardbejarano/teamspeak`](https://quay.io/repository/ricardbejarano/teamspeak):
 
-- [`3.13.4`, `latest` *(Dockerfile)*](Dockerfile)
+- [`3.13.5`, `latest` *(Dockerfile)*](Dockerfile)
 
 
 ## Features
