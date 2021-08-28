@@ -1,7 +1,7 @@
 FROM alpine:3 AS build
 
-ARG VERSION="3.13.5"
-ARG CHECKSUM="db70478d8b2d6358c0005504f1673e490ec0220b7ab93bdb418f0b051f4940aa"
+ARG VERSION="3.13.6"
+ARG CHECKSUM="f30a5366f12b0c5b00476652ebc06d9b5bc4754c4cb386c086758cceb620a8d0"
 
 ADD https://files.teamspeak-services.com/releases/server/$VERSION/teamspeak3-server_linux_alpine-$VERSION.tar.bz2 /tmp/teamspeak.tar.bz2
 
