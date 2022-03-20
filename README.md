@@ -1,6 +1,17 @@
-<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/speech-balloon_1f4ac.png" width="120px"></p>
-<h1 align="center">teamspeak (container image)</h1>
-<p align="center">Minimal container image of the <a href="https://teamspeak.com/en/">TeamSpeak</a> voice chat server</p>
+<div align="center">
+	<p><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/325/headphone_1f3a7.png" width="100px"></p>
+	<h1>teamspeak</h1>
+	<p>Built-from-source container image of <a href="https://www.teamspeak.com/en/">TeamSpeak</a></p>
+	<code>docker pull quay.io/ricardbejarano/teamspeak</code>
+</div>
+
+
+## Features
+
+* Pulled from official sources during build time
+* Built `FROM scratch`, with zero bloat
+* Reduced attack surface (no shell, no UNIX tools, no package manager...)
+* Runs as unprivileged (non-`root`) user
 
 
 ## Tags
@@ -18,22 +29,6 @@ Available on RedHat Quay as [`quay.io/ricardbejarano/teamspeak`](https://quay.io
 - [`3.13.6`, `latest` *(Dockerfile)*](Dockerfile)
 
 
-## Features
-
-* Pulled from official sources during build time
-* Built `FROM scratch`, with zero bloat
-* Dynamically linked to the [`musl`](https://musl.libc.org/) implementation of the C standard library
-* Reduced attack surface (no shell, no UNIX tools, no package manager...)
-* Runs as unprivileged (non-`root`) user
-
-
-## Building
-
-```bash
-docker build --tag ricardbejarano/teamspeak --file Dockerfile .
-```
-
-
 ## Configuration
 
 ### Volumes
@@ -41,8 +36,3 @@ docker build --tag ricardbejarano/teamspeak --file Dockerfile .
 - Mount your **database** at `/data/ts3server.sqlitedb`
 
 ***Note:** do not mount at `/data`, you will override some runtime dependencies.*
-
-
-## License
-
-MIT licensed, see [LICENSE](LICENSE) for more details.
