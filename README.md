@@ -1,5 +1,5 @@
 <div align="center">
-	<p><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/325/headphone_1f3a7.png" width="100px"></p>
+	<p><img src="https://em-content.zobj.net/thumbs/160/apple/325/headphone_1f3a7.png" width="100px"></p>
 	<h1>teamspeak</h1>
 	<p>Built-from-source container image of <a href="https://www.teamspeak.com/en/">TeamSpeak</a></p>
 	<code>docker pull quay.io/ricardbejarano/teamspeak</code>
